@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Die from './components/Die'
 
 export default function App() {
+  const [dice, setDice] = useState(generateAllNewDice())
+
   function generateAllNewDice() {
     let randomDice = []
     for (let i = 0; i < 10; i++) {
@@ -11,7 +13,11 @@ export default function App() {
     return randomDice
   }
 
-  const [dice, setDice] = useState(generateAllNewDice())
+  function reRollDice() {
+    setDice(generateAllNewDice())
+  }
+
+  const diceElements = dice.map((die, index) => <Die key={index} value={die} />)
 
   return (
     <main>
@@ -20,12 +26,10 @@ export default function App() {
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls.
       </p>
-      <div className='dice-container'>
-        {dice.map((die, index) => (
-          <Die key={index} value={die} />
-        ))}
-      </div>
-      <button className='btn'>Roll</button>
+      <div className='dice-container'>{diceElements}</div>
+      <button className='btn' onClick={reRollDice}>
+        Roll
+      </button>
     </main>
   )
 }
