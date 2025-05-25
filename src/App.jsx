@@ -28,14 +28,18 @@ export default function App() {
   }
 
   function rollDice() {
-    const rolledDice = dice.map((die) => {
-      if (die.isHeld) {
-        return die
-      } else {
-        return { ...die, value: Math.ceil(Math.random() * 6) }
-      }
-    })
-    setDice(rolledDice)
+    if (!gameWon) {
+      const rolledDice = dice.map((die) => {
+        if (die.isHeld) {
+          return die
+        } else {
+          return { ...die, value: Math.ceil(Math.random() * 6) }
+        }
+      })
+      setDice(rolledDice)
+    } else {
+      setDice(generateAllNewDice())
+    }
   }
 
   function hold(id) {
