@@ -1,6 +1,18 @@
+import { useState } from 'react'
 import Die from './components/Die'
 
 export default function App() {
+  function generateAllNewDice() {
+    let randomDice = []
+    for (let i = 0; i < 10; i++) {
+      const randomNumber = Math.floor(Math.random() * 6 + 1)
+      randomDice.push(randomNumber)
+    }
+    return randomDice
+  }
+
+  const [dice, setDice] = useState(generateAllNewDice())
+
   return (
     <main>
       <h1>Tenzies</h1>
@@ -9,16 +21,9 @@ export default function App() {
         current value between rolls.
       </p>
       <div className='dice-container'>
-        <Die value={1} />
-        <Die value={3} />
-        <Die value={2} />
-        <Die value={4} />
-        <Die value={4} />
-        <Die value={6} />
-        <Die value={5} />
-        <Die value={1} />
-        <Die value={4} />
-        <Die value={6} />
+        {dice.map((die, index) => (
+          <Die key={index} value={die} />
+        ))}
       </div>
       <button className='btn'>Roll</button>
     </main>

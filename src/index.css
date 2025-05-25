@@ -75,6 +75,6 @@ p {
   height: 36px;
   width: 36px;
   background-color: #ffffff;
-  box-shadow: 0 2px 2px rgba(#000, 0.15);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
   font-size: 1.25rem;
 }
